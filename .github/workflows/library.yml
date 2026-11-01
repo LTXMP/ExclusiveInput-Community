@@ -1,0 +1,33 @@
+name: Config library
+on:
+  push:
+    paths: ['configs/**', 'tools/**', '.github/workflows/library.yml']
+  pull_request:
+    paths: ['configs/**', 'tools/**', '.github/workflows/library.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/build_index.py --check
+  index:
+    if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    needs: validate
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/build_index.py
+      - name: Update index
+        shell: bash
+        run: |
+          if git diff --quiet -- index.json; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git commit -m "Update config browse index"
+          git push

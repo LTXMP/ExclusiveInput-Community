@@ -1,0 +1,31 @@
+name: Review config submission
+on:
+  issues:
+    types: [opened, edited, reopened, labeled]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: submission-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+jobs:
+  tests:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s tools -p 'test_*.py'
+  submit:
+    if: github.event.issue.state == 'open' && contains(github.event.issue.labels.*.name, 'config-submission')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 tools/submit_config.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
