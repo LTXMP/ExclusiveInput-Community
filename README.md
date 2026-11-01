@@ -1,6 +1,6 @@
-# Exclusive XIM community configs
+# ExclusiveInput community configs
 
-Free configs shared by Exclusive XIM users, with maintainer review before publication.
+Free configs shared by ExclusiveInput users, with maintainer review before publication.
 
 ## Browse and copy
 
@@ -8,7 +8,7 @@ Open **Community** in the current desktop app. It loads this library automatical
 
 ## Share a config
 
-1. Save the config locally in Exclusive XIM.
+1. Save the config locally in ExclusiveInput.
 2. Open **Community → Share config**, select it, add your contributor name and description, and confirm permission to share it under CC0.
 3. Choose **Continue to submission**. The app prepares the complete JSON file and opens the submission form. Use **Show file** to locate it.
 4. Attach that JSON file in the form and submit with your GitHub account.

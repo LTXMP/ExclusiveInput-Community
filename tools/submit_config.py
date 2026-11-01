@@ -40,7 +40,7 @@ def download(url):
         if not trusted_download(url):
             raise ValueError('The attachment redirected outside GitHub file storage.')
         try:
-            with opener.open(urllib.request.Request(url, headers={'User-Agent': 'ExclusiveXIM-Community'}), timeout=20) as response:
+            with opener.open(urllib.request.Request(url, headers={'User-Agent': 'ExclusiveInput-Community'}), timeout=20) as response:
                 data = response.read(MAX_BYTES + 1)
                 if len(data) > MAX_BYTES:
                     raise ValueError('Config exceeds 4 MiB.')
@@ -58,7 +58,7 @@ def read_package(body, fetch=download):
     urls = re.findall(r'https://github\.com/user-attachments/files/[^\s)<>]+', body)
     blocks = re.findall(r'```json\s*\n(.*?)\n```', body, re.S)
     if len(urls) + len(blocks) != 1:
-        raise ValueError('Attach exactly one .json config file prepared by Exclusive XIM.')
+        raise ValueError('Attach exactly one .json config file prepared by ExclusiveInput.')
     if urls:
         if not attachment_url(urls[0]):
             raise ValueError('Attach a .json file using the GitHub attachment button.')
@@ -84,7 +84,7 @@ class GitHub:
         request = urllib.request.Request('https://api.github.com' + path,
             data=None if body is None else json.dumps(body).encode(), method=method,
             headers={'Authorization': 'Bearer ' + self.token, 'Accept': 'application/vnd.github+json',
-                     'Content-Type': 'application/json', 'User-Agent': 'ExclusiveXIM-Community'})
+                     'Content-Type': 'application/json', 'User-Agent': 'ExclusiveInput-Community'})
         with urllib.request.urlopen(request, timeout=30) as response:
             return json.load(response) if response.status != 204 else None
 

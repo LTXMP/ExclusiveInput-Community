@@ -1,19 +1,19 @@
 name: Share a config
-description: Submit a free Exclusive XIM config for the community library.
+description: Submit a free ExclusiveInput config for the community library.
 title: "[Config] "
 labels: [config-submission]
 body:
   - type: markdown
     attributes:
       value: |
-        Attach the JSON file prepared by **Community → Share config** in Exclusive XIM.
+        Attach the JSON file prepared by **Community → Share config** in ExclusiveInput.
         The bot validates it and opens a review. A maintainer must merge the review before your config appears in the app.
   - type: textarea
     id: package
     attributes:
       label: Config package
       description: Drag the prepared .json file into this box, or click the attachment button. Wait for the upload to finish.
-      placeholder: Attach your Exclusive XIM config here.
+      placeholder: Attach your ExclusiveInput config here.
     validations:
       required: true
   - type: checkboxes
