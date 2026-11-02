@@ -2,7 +2,7 @@
 import json
 import math
 
-PROFILE_FIELDS = set("schema name game platform color cover aim devices movement input_routing hardware arbitration input_mode controller graph bindings physical_button_bindings analog_bindings groups group_names output actions calibration calibration_origin calibration_measurements mapping".split())
+PROFILE_FIELDS = set("schema name game platform color cover shortcut sights aim devices movement input_routing hardware arbitration input_mode controller graph bindings physical_button_bindings analog_bindings groups group_names group_policy output actions calibration calibration_origin calibration_measurements mapping".split())
 
 def validate_config(package):
     if not isinstance(package, dict) or set(package) != {"schema", "license", "author", "description", "config"}:
